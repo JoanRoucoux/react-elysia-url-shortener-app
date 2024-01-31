@@ -3,9 +3,9 @@
 This application allows you to...
 
 ## Stack
-| Client  | Server | Database |
+| Client  | Server | Cache | Database |
 | ------------- | ------------- | ------------- |
-| Nuxt.js | Bun | MongoDB |
+| React | ElysiaJS (Bun) | Redis | MongoDB |
 
 ## Demo
 TBD
