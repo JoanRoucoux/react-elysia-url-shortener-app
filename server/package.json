@@ -1,0 +1,21 @@
+{
+  "name": "server",
+  "version": "1.0.50",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "=0.8.0",
+    "@elysiajs/cron": "=0.8.0",
+    "@elysiajs/swagger": "=0.8.5",
+    "elysia": "=0.8.14",
+    "mongoose": "=8.1.1",
+    "nanoid": "=5.0.4",
+    "redis": "=4.6.12"
+  },
+  "devDependencies": {
+    "bun-types": "=1.0.25"
+  },
+  "module": "src/index.js"
+}

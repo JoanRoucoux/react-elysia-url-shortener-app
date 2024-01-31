@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
+    ports:
+      - ${MONGODB_LOCAL_PORT}:${MONGODB_DOCKER_PORT}
+    volumes:
+      - ./db:/data/db
+
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - ${REDIS_LOCAL_PORT}:${REDIS_DOCKER_PORT}
+
+  server:
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      - MONGODB_USER=${MONGODB_USER}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_HOST=${MONGODB_HOST}
+      - MONGODB_DOCKER_PORT=${MONGODB_DOCKER_PORT}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_DOCKER_PORT=${REDIS_DOCKER_PORT}
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - /usr/src/bun-app/node_modules
+      - ./server:/usr/src/bun-app
+    ports:
+      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}

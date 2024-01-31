@@ -1,0 +1,31 @@
+import { Document, Schema, model } from 'mongoose';
+
+export interface IUrl extends Document {
+  originalUrl: string;
+  shortenUrl: string;
+  createdAt: Date;
+  expiresAt: Date;
+}
+
+const schema = new Schema<IUrl>({
+  originalUrl: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  shortenUrl: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
+  expiresAt: {
+    type: Date,
+    default: new Date(new Date().setMinutes(new Date().getMinutes() + 5)), // for demonstration only
+  },
+});
+
+export default model<IUrl>('url', schema);
