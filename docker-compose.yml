@@ -30,6 +30,7 @@ services:
       - MONGODB_DOCKER_PORT=${MONGODB_DOCKER_PORT}
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_DOCKER_PORT=${REDIS_DOCKER_PORT}
+      - BUN_LOCAL_PORT=${BUN_LOCAL_PORT}
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -38,4 +39,4 @@ services:
       - /usr/src/bun-app/node_modules
       - ./server:/usr/src/bun-app
     ports:
-      - ${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}
+      - ${BUN_LOCAL_PORT}:${BUN_DOCKER_PORT}

@@ -8,7 +8,7 @@ import { mongoose, redis } from './helpers';
 mongoose.run();
 redis.run();
 
-const port = process.env.NODE_LOCAL_PORT || 8080;
+const port = process.env.BUN_LOCAL_PORT || 8080;
 export const app = new Elysia();
 
 app
