@@ -2,7 +2,7 @@ import { Document, Schema, model } from 'mongoose';
 
 export interface IUrl extends Document {
   originalUrl: string;
-  shortenUrl: string;
+  shortenUrlKey: string;
   createdAt: Date;
   expiresAt: Date;
 }
@@ -13,7 +13,7 @@ const schema = new Schema<IUrl>({
     required: true,
     unique: true,
   },
-  shortenUrl: {
+  shortenUrlKey: {
     type: String,
     required: true,
     unique: true,

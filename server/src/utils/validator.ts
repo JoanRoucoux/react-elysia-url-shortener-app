@@ -1,12 +1,7 @@
 export const isValidUrl = (value: string): boolean => {
-  var pattern = new RegExp(
-    '^((ft|htt)ps?:\\/\\/)?' +
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
-      '((\\d{1,3}\\.){3}\\d{1,3}))' +
-      '(\\:\\d+)?' +
-      '(\\/[-a-z\\d%@_.~+&:]*)*' +
-      '(\\?[;&a-z\\d%@_.,~+&:=-]*)?' +
-      '(\\#[-a-z\\d_]*)?$',
+  const pattern: RegExp = new RegExp(
+    '^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}' +
+      '\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$',
     'i'
   );
   return pattern.test(value);

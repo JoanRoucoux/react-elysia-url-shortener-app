@@ -1,9 +1,6 @@
-version: '3.8'
-
 services:
   mongo:
     image: mongo
-    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASSWORD}
@@ -14,7 +11,6 @@ services:
 
   redis:
     image: redis
-    restart: always
     ports:
       - ${REDIS_LOCAL_PORT}:${REDIS_DOCKER_PORT}
 
@@ -34,9 +30,34 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    restart: always
     volumes:
       - /usr/src/bun-app/node_modules
       - ./server:/usr/src/bun-app
     ports:
       - ${BUN_LOCAL_PORT}:${BUN_DOCKER_PORT}
+
+  nginx:
+    depends_on:
+      - server
+    environment:
+      - BUN_LOCAL_PORT=${BUN_LOCAL_PORT}
+      - NGINX_DOCKER_PORT=${NGINX_DOCKER_PORT}
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - ${NGINX_LOCAL_PORT}:${NGINX_DOCKER_PORT}
+
+  client:
+    depends_on:
+      - nginx
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/src/react-app/node_modules
+      - ./client:/usr/src/react-app
+    ports:
+      - ${VITE_APP_LOCAL_PORT}:${VITE_APP_DOCKER_PORT}

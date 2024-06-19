@@ -1,11 +1,11 @@
 # Use an official Bun runtime as the base image
-FROM oven/bun:1
+FROM oven/bun:alpine
 
 # Set the working directory
 WORKDIR /usr/src/bun-app
 
 # Copy package.json and bun.lockb to the container
-COPY package.json ./
+COPY package*.json ./
 COPY bun.lockb ./
 
 # Install application dependencies

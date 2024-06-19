@@ -9,14 +9,13 @@ mongoose.run();
 redis.run();
 
 const port = process.env.BUN_LOCAL_PORT || 8080;
-export const app = new Elysia();
+export const app = new Elysia({ prefix: '/api/v1' });
 
 app
   .use(cors())
   .use(swagger())
   .use(purge)
-  .get('/', () => 'Hello Elysia!')
-  .group('/api', (app: Elysia) => app.use(urlsRouter))
+  .use(urlsRouter)
   .listen(port, () => {
     console.log(`🦊 Elysia is running at ${app.server?.hostname}:${port}`);
   });

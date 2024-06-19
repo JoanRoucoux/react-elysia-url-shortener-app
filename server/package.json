@@ -2,20 +2,21 @@
   "name": "server",
   "version": "1.0.50",
   "scripts": {
+    "start": "bun run src/index.ts",
     "dev": "bun run --watch src/index.ts",
-    "start": "bun run src/index.ts"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@elysiajs/cors": "=0.8.0",
-    "@elysiajs/cron": "=0.8.0",
-    "@elysiajs/swagger": "=0.8.5",
-    "elysia": "=0.8.14",
-    "mongoose": "=8.1.1",
-    "nanoid": "=5.0.4",
-    "redis": "=4.6.12"
+    "@elysiajs/cors": "^1.0.2",
+    "@elysiajs/cron": "^1.0.3",
+    "@elysiajs/swagger": "^1.0.5",
+    "elysia": "latest",
+    "mongoose": "^8.3.4",
+    "nanoid": "^5.0.7",
+    "redis": "^4.6.13"
   },
   "devDependencies": {
-    "bun-types": "=1.0.25"
+    "bun-types": "latest"
   },
   "module": "src/index.js"
 }
